@@ -42,9 +42,14 @@ This project is ideal for students learning **Operating Systems**, **File System
 
 ## File System Structure
 
-<pre> ```plaintext File System Structure ---------------------- ┌─────────────────┐ │ Superblock │ Block 0 ├─────────────────┤ │ Inode Bitmap │ Block 1 ├─────────────────┤ │ Data Bitmap │ Block 2 ├─────────────────┤ │ Inode Table │ Blocks 3 to 3+N ├─────────────────┤ │ Data Region │ Remaining blocks └─────────────────┘ ``` </pre>
+| Section        | Block(s)       | Description                        |
+|----------------|---------------|------------------------------------|
+| Superblock     | 0             | Filesystem metadata, CRC32 checksum|
+| Inode Bitmap   | 1             | Tracks allocated inodes            |
+| Data Bitmap    | 2             | Tracks allocated data blocks       |
+| Inode Table    | 3 to 3 + N    | Stores inode structures            |
+| Data Region    | Remaining     | Actual file contents               |
 
----
 
 ## Usage
 
