@@ -59,12 +59,14 @@ Parameters:
 --image: Output image filename
 --size-kib: Total size in KB (multiple of 4, 180–4096)
 --inodes: Number of inodes (128–512)
+
 Adding Files to the Filesystem
 ./mkfs_adder --input filesystem.img --output filesystem_new.img --file myfile.txt
 Parameters:
 --input: Input filesystem image
 --output: Output filesystem image
 --file: File to add
+
 Inspecting Disk Image
 xxd -l 512 filesystem_new.img | less
 Dumps the first 512 bytes (superblock area) of the image.
@@ -74,17 +76,19 @@ Dumps the first 512 bytes (superblock area) of the image.
 ## Technical Specifications
 
 Superblock (116 bytes)
-Magic number (0x4D565346)
+Magic number: 0x4D565346
 Version, block size, total blocks
 Bitmap and inode table locations
 Data region layout
 CRC32 checksum
+
 Inode (128 bytes)
 File mode and permissions
 Size, timestamps (atime, mtime, ctime)
 Direct block pointers (12 blocks max)
 User/group IDs
 CRC32 checksum
+
 Directory Entry (64 bytes)
 Inode number
 File type (file/directory)
@@ -93,7 +97,7 @@ XOR checksum
 
 ---
 
-### Project Structure
+## Project Structure
 
 MiniVSFS/
 ├── mkfs_builder.c    # Filesystem creation utility
@@ -104,6 +108,8 @@ MiniVSFS/
 ├── Makefile          # Build instructions
 ├── README.md         # Documentation
 └── .gitignore        # Git ignore rules
+
+---
 
 ## Limitations
 
@@ -125,20 +131,14 @@ I/O errors
 ---
 
 ## Installation
+
 1. Clone this repository:
-   ```bash
-   git clone https://github.com/<your-username>/MiniVSFS.git
-   cd MiniVSFS
+git clone https://github.com/<your-username>/MiniVSFS.git
+cd MiniVSFS
+
 2. Compile the utilities:
-   gcc -o mkfs_builder mkfs_builder.c
-   gcc -o mkfs_adder mkfs_adder.c
+gcc -o mkfs_builder mkfs_builder.c
+gcc -o mkfs_adder mkfs_adder.c
+
 3. Make sure the binaries are executable:
-   chmod +x mkfs_builder mkfs_adder
-
-   
-
-
-
-
-
-
+chmod +x mkfs_builder mkfs_adder
