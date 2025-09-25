@@ -8,13 +8,13 @@ This project demonstrates how file systems manage storage, inodes, directories, 
 ## Table of Contents
 - [About](#about)
 - [Features](#features)
+- [File System Structure](#file-system-structure)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Technical Specifications](#technical-specifications)
 - [Project Structure](#project-structure)
-- [Contributors](#contributors)
-- [License](#license)
-- [Contact](#contact)
-
+- [Limitations](#limitations)
+- [Error Handling](#error-handling)
 ---
 
 ## About
@@ -29,11 +29,102 @@ This project is ideal for students learning **Operating Systems**, **File System
 ---
 
 ## Features
-- Initialize a disk image with a custom size and inode count.
-- Add files into the virtual file system.
-- Read file metadata and contents.
-- Inspect superblock and directory entries.
-- Command-line utilities to interact with the file system.
+- Block-based storage (4KB blocks)
+- Inode-based file system (128-byte inodes)
+- Direct block addressing (up to 12 blocks per file)
+- Directory entries (64 bytes each)
+- Bitmap allocation for inodes and data blocks
+- CRC32 checksums for metadata integrity
+- Root directory with standard `.` and `..` entries
+- Command-line utilities to create and modify the filesystem
+
+---
+
+## File System Structure
+┌─────────────────┐
+│ Superblock │ Block 0
+├─────────────────┤
+│ Inode Bitmap │ Block 1
+├─────────────────┤
+│ Data Bitmap │ Block 2
+├─────────────────┤
+│ Inode Table │ Blocks 3 to 3+N
+├─────────────────┤
+│ Data Region │ Remaining blocks
+└─────────────────┘
+
+---
+
+## Usage
+
+Creating a New Filesystem
+./mkfs_builder --image filesystem.img --size-kib 1024 --inodes 256
+Parameters:
+--image: Output image filename
+--size-kib: Total size in KB (multiple of 4, 180–4096)
+--inodes: Number of inodes (128–512)
+Adding Files to the Filesystem
+./mkfs_adder --input filesystem.img --output filesystem_new.img --file myfile.txt
+Parameters:
+--input: Input filesystem image
+--output: Output filesystem image
+--file: File to add
+Inspecting Disk Image
+xxd -l 512 filesystem_new.img | less
+Dumps the first 512 bytes (superblock area) of the image.
+
+---
+
+## Technical Specifications
+
+Superblock (116 bytes)
+Magic number (0x4D565346)
+Version, block size, total blocks
+Bitmap and inode table locations
+Data region layout
+CRC32 checksum
+Inode (128 bytes)
+File mode and permissions
+Size, timestamps (atime, mtime, ctime)
+Direct block pointers (12 blocks max)
+User/group IDs
+CRC32 checksum
+Directory Entry (64 bytes)
+Inode number
+File type (file/directory)
+Filename (up to 57 characters)
+XOR checksum
+
+---
+
+### Project Structure
+
+MiniVSFS/
+├── mkfs_builder.c    # Filesystem creation utility
+├── mkfs_adder.c      # File addition utility
+├── src/              # Additional source files
+├── include/          # Header files
+├── tests/            # Example test files
+├── Makefile          # Build instructions
+├── README.md         # Documentation
+└── .gitignore        # Git ignore rules
+
+## Limitations
+
+Maximum file size: 48 KB (12 × 4KB blocks)
+Only root directory supported (no subdirectories)
+No symbolic links or extended attributes
+Maximum entries per directory block
+
+---
+
+## Error Handling
+
+Invalid filesystem images
+Insufficient space (inodes/data blocks)
+File size limitations
+Duplicate filenames
+I/O errors
 
 ---
 
@@ -42,3 +133,16 @@ This project is ideal for students learning **Operating Systems**, **File System
    ```bash
    git clone https://github.com/<your-username>/MiniVSFS.git
    cd MiniVSFS
+2. Compile the utilities:
+   gcc -o mkfs_builder mkfs_builder.c
+   gcc -o mkfs_adder mkfs_adder.c
+3. Make sure the binaries are executable:
+   chmod +x mkfs_builder mkfs_adder
+
+   
+
+
+
+
+
+
