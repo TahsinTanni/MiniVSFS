@@ -98,18 +98,12 @@ XOR checksum
 ---
 ## Project Structure
 
-┌──────────────────────────────┐
-│ MiniVSFS/                     │
-├──────────────────────────────┤
-│ mkfs_builder.c    # Filesystem creation utility
-│ mkfs_adder.c      # File addition utility
-│ src/              # Additional source files
-│ include/          # Header files
-│ tests/            # Example test files
-│ Makefile          # Build instructions
-│ README.md         # Documentation
-│ .gitignore        # Git ignore rules
-└──────────────────────────────┘
+```
+├── mkfs_builder.c    # Filesystem creation utility
+├── mkfs_adder.c      # File addition utility
+├── file_*.txt        # Sample test files
+└── README.md         # This documentation
+```
 
 
 ## Limitations
@@ -123,13 +117,13 @@ XOR checksum
 
 ## Error Handling
 
+The implementation includes comprehensive error checking for:
+
 - Invalid filesystem images
 - Insufficient space (inodes/data blocks)
 - File size limitations
 - Duplicate filenames
 - I/O errors
-
----
 
 ## Installation
 
@@ -143,3 +137,8 @@ gcc -o mkfs_adder mkfs_adder.c
 
 3. Make sure the binaries are executable:
 chmod +x mkfs_builder mkfs_adder
+
+## Helper DOC
+
+You can view the helper documentation [here](https://docs.google.com/document/d/1TKeNfHOCvLOceYXpUFmnTPE4n6Zna1RU2-40olV_XSs/edit?tab=t.2t18mw9qpgw1).
+
