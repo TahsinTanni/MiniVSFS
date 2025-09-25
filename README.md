@@ -100,16 +100,15 @@ XOR checksum
 ## Project Structure
 
 MiniVSFS/
-├── mkfs_builder.c    # Filesystem creation utility
-├── mkfs_adder.c      # File addition utility
-├── src/              # Additional source files
-├── include/          # Header files
-├── tests/            # Example test files
-├── Makefile          # Build instructions
-├── README.md         # Documentation
-└── .gitignore        # Git ignore rules
+├── mkfs_builder.c     # Filesystem creation utility
+├── mkfs_adder.c       # File addition utility
+├── src/               # Additional source files
+├── include/           # Header files
+├── tests/             # Example test files
+├── Makefile           # Build instructions
+├── README.md          # Documentation
+└── .gitignore         # Git ignore rules
 
----
 
 ## Limitations
 
