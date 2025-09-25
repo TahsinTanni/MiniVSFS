@@ -128,14 +128,15 @@ The implementation includes comprehensive error checking for:
 ## Installation
 
 1. Clone this repository:
-git clone https://github.com/<your-username>/MiniVSFS.git
-cd MiniVSFS
+https://github.com/TahsinTanni/MiniVSFS.git
 
-2. Compile the utilities:
+2. cd MiniVSFS
+
+3. Compile the utilities:
 gcc -o mkfs_builder mkfs_builder.c
 gcc -o mkfs_adder mkfs_adder.c
 
-3. Make sure the binaries are executable:
+4. Make sure the binaries are executable:
 chmod +x mkfs_builder mkfs_adder
 
 ## Helper DOC
