@@ -98,24 +98,25 @@ XOR checksum
 ---
 
 ## Project Structure
-
-MiniVSFS/
-├── mkfs_builder.c     # Filesystem creation utility
-├── mkfs_adder.c       # File addition utility
-├── src/               # Additional source files
-├── include/           # Header files
-├── tests/             # Example test files
-├── Makefile           # Build instructions
-├── README.md          # Documentation
-└── .gitignore         # Git ignore rules
-
+┌─────────────────────────────┐
+│ MiniVSFS/ │
+├─────────────────────────────┤
+│ mkfs_builder.c # Filesystem creation utility
+│ mkfs_adder.c # File addition utility
+│ src/ # Additional source files
+│ include/ # Header files
+│ tests/ # Example test files
+│ Makefile # Build instructions
+│ README.md # Documentation
+│ .gitignore # Git ignore rules
+└─────────────────────────────┘
 
 ## Limitations
 
-Maximum file size: 48 KB (12 × 4KB blocks)
-Only root directory supported (no subdirectories)
-No symbolic links or extended attributes
-Maximum entries per directory block
+--- Maximum file size: 48 KB (12 × 4KB blocks)
+--- Only root directory supported (no subdirectories)
+--- No symbolic links or extended attributes
+--- Maximum entries per directory block
 
 ---
 
